@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Cloud Docs Hub: guides for static hosting on AWS with S3, CloudFront, HTTPS, CORS and GitHub Actions CI/CD."
+    />
+    <title>Cloud Docs Hub</title>
+    <!--css-->
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- header -->
+    <header class="nav-bar">
+      <div class="nav-brand">
+        <span class="brand-title">Cloud Docs Hub</span>
+      </div>
+
+      <div class="search-container" role="search">
+        <input
+          type="search"
+          id="doc-search"
+          name="q"
+          autocomplete="off"
+          placeholder="Search docs (e.g. S3, CORS, CloudFront...)"
+          aria-label="Search documentation"
+        />
+      </div>
+
+      <div class="nav-controls">
+        <button
+          type="button"
+          id="theme-toggle"
+          class="btn-theme"
+          aria-pressed="false"
+        >
+          Dark mode
+        </button>
+        <a
+          href="https://github.com/CalebCheptumo/cloud-docs-hub"
+          target="_blank"
+          rel="noopener"
+          class="btn-github"
+          >GitHub repository
+          <span class="visually-hidden">(opens in a new tab)</span></a
+        >
+      </div>
+    </header>
+
+    <div class="layout-container">
+      <!-- sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <h2>Documentation</h2>
+        </div>
+        <nav id="sidebar-nav" class="nav-menu" aria-label="Documentation">
+          <ul id="doc-links">
+            <li>
+              <a
+                href="#index.md"
+                class="nav-link active"
+                data-doc="index.md"
+                aria-current="page"
+                >Getting Started</a
+              >
+            </li>
+            <li>
+              <a href="#s3-setup.md" class="nav-link" data-doc="s3-setup.md"
+                >S3 Static Hosting</a
+              >
+            </li>
+            <li>
+              <a
+                href="#cloudfront-https.md"
+                class="nav-link"
+                data-doc="cloudfront-https.md"
+                >CloudFront and HTTPS</a
+              >
+            </li>
+            <li>
+              <a href="#cors-guide.md" class="nav-link" data-doc="cors-guide.md"
+                >CORS Best Practice</a
+              >
+            </li>
+            <li>
+              <a
+                href="#cicd-pipeline.md"
+                class="nav-link"
+                data-doc="cicd-pipeline.md"
+                >GitHub Actions CI/CD</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- main content -->
+      <main id="main" class="content-area">
+        <nav class="breadcrumb-container" aria-label="Breadcrumb">
+          <ol class="breadcrumbs">
+            <li class="breadcrumb-item">
+              <a href="#index.md">Docs</a>
+            </li>
+            <li
+              class="breadcrumb-item active"
+              id="breadcrumb-current"
+              aria-current="page"
+            >
+              Getting Started
+            </li>
+          </ol>
+        </nav>
+
+        <!-- Rendered markdown -->
+        <article id="markdown-viewer" class="markdown-body">
+          <div class="loading-spinner" role="status">
+            Loading documentation…
+          </div>
+        </article>
+      </main>
+    </div>
+    <!--js-->
+    <script src="assets/js/main.js" defer></script>
+  </body>
+</html>
