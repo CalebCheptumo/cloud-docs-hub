@@ -1,0 +1,49 @@
+name: Deploy CloudDocs Hub to AWS S3
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Allows manual workflow execution
+
+# Least privilege: id-token is required for OIDC, contents to checkout code
+permissions:
+  id-token: write
+  contents: read
+
+# Prevent two deployments from running at the same time
+concurrency:
+  group: deploy-s3
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Sync to S3
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      # Step 1: Checkout repository source code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      # Step 2: Authenticate with AWS via OIDC (no access keys needed)
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Step 3: Sync static site files to the S3 bucket
+      - name: Deploy to S3
+        run: |
+          aws s3 sync ./ s3://${{ secrets.AWS_S3_BUCKET }}/ \
+            --delete \
+            --cache-control "no-cache" \
+            --exclude ".git/*" \
+            --exclude ".github/*" \
+            --exclude ".gitignore" \
+            --exclude "README.md" \
+            --exclude "LICENSE"
